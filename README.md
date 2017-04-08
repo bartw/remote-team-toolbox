@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bartw/remote-team-toolbox.svg?branch=master)](https://travis-ci.org/bartw/remote-team-toolbox)
+
 # remote-team-toolbox
 
 ## Quickstart
