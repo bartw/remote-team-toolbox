@@ -7,12 +7,9 @@ Install dotnet core from https://www.microsoft.com/net/core#windowscmd.
 ```shell
 git clone https://github.com/bartw/remote-team-toolbox
 cd remote-team-toolbox
-cd RemoteTeamToolbox.Core
+cd ./RemoteTeamToolbox.Core.Test
 dotnet restore
-cd ..
-cd RemoteTeamToolbox.Core.Test
-dotnet restore
-dotnet watch text
+dotnet watch test
 ```
 
 ## License
