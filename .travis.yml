@@ -5,4 +5,4 @@ mono: none
 dotnet: 1.0.1
 script:    
   - dotnet restore ./RemoteTeamToolbox.Core.Test
-  - dotnet test ./RemoteTeamToolbox.Core.Test
+  - dotnet test ./RemoteTeamToolbox.Core.Test/RemoteTeamToolbox.Core.Test.csproj
