@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace RemoteTeamToolbox.Core
@@ -34,6 +35,11 @@ namespace RemoteTeamToolbox.Core
         public bool IsEstimationComplete()
         {
             return _estimations.Values.All(value => value.SpecialValue != SpecialEstimate.Empty);
+        }
+
+        public ReadOnlyDictionary<Guid, Estimate> GetEstimates()
+        {
+            return new ReadOnlyDictionary<Guid, Estimate>(_estimations);
         }
     }
 }

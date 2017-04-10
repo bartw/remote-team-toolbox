@@ -58,12 +58,6 @@ namespace RemoteTeamToolbox.Core.Test
             Assert.Equal(estimate, estimation.GetEstimateFor(key));
         }
 
-        // [Theory]
-        // [InlineData(, false)]
-        // [InlineData(new Estimate(SpecialEstimate.Empty), new Estimate(SpecialEstimate.Infinity), new Estimate(SpecialEstimate.Empty), false)]
-        // [InlineData(new Estimate(SpecialEstimate.Empty), new Estimate(SpecialEstimate.Empty), new Estimate(13m), false)]
-        // [InlineData(new Estimate(SpecialEstimate.Unsure), new Estimate(SpecialEstimate.Infinity), new Estimate(SpecialEstimate.Break), true)]
-        // [InlineData(new Estimate(22m), new Estimate(2m), new Estimate(13m), true)]
         [Fact]
         public void GivenAnAllEmptyEstimation_WhenIsEstimationComplete_ThenFalseIsReturned()
         {
@@ -109,6 +103,24 @@ namespace RemoteTeamToolbox.Core.Test
             estimation.SetEstimateFor(subscribers[2], new Estimate(SpecialEstimate.Unsure));
             
             Assert.True(estimation.IsEstimationComplete());
+        }
+
+        [Fact]
+        public void GivenAnEstimation_WhenGetEstimates_ThenTheEstimatesAreturned()
+        {
+            var subscribers = new [] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()};
+            var estimation = new Estimation(subscribers);
+
+            estimation.SetEstimateFor(subscribers[0], new Estimate(SpecialEstimate.Break));
+            estimation.SetEstimateFor(subscribers[1], new Estimate(SpecialEstimate.Infinity));
+            estimation.SetEstimateFor(subscribers[2], new Estimate(SpecialEstimate.Unsure));
+            
+            var estimates = estimation.GetEstimates();
+
+            Assert.Equal(3, estimates.Count);
+            Assert.Equal(SpecialEstimate.Break, estimates[subscribers[0]].SpecialValue);
+            Assert.Equal(SpecialEstimate.Infinity, estimates[subscribers[1]].SpecialValue);
+            Assert.Equal(SpecialEstimate.Unsure, estimates[subscribers[2]].SpecialValue);
         }
     }
 }
